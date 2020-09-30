@@ -1,19 +1,29 @@
 export function createCounter(initOption) {
   const counterData = initOption || {
-    initValue: 0,
+    initVal: 0,
     min: null,
     max: null,
   };
 
   return {
     val() {
-      return counterData.initValue;
+      return counterData.initVal;
     },
     inc() {
-      counterData.initValue += 1;
+      if (counterData.max !== null && counterData.max > counterData.initVal) {
+        counterData.initVal += 1;
+      }
+      if (counterData.max === null) {
+        counterData.initVal += 1;
+      }
     },
     dec() {
-      counterData.initValue -= 1;
+      if (counterData.min !== null && counterData.min < counterData.initVal) {
+        counterData.initVal -= 1;
+      }
+      if (counterData.min === null) {
+        counterData.initVal -= 1;
+      }
     },
     isMax() {
       return Boolean(counterData.max && counterData.max === this.val());
