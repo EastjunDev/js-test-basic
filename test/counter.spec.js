@@ -2,7 +2,8 @@ import { createCounter } from "../src/counter";
 
 // Step 1
 describe("옵션이 지정되지 않은 경우", () => {
-  const counter = createCounter();
+  let counter;
+  beforeEach(() => (counter = createCounter()));
 
   it("초기값은 0이다.", () => {
     expect(counter.val()).toEqual(0);
@@ -39,19 +40,18 @@ it("initValue 옵션 사용 시 초기값이 해당 값으로 지정된다.", ()
 });
 
 describe("min 옵션 사용 시 현재값과 min 값이 동일하면", () => {
-  const initValue = 1;
-  const max = 10;
-  const min = 0;
-  const counter = createCounter({ initValue, max, min });
+  let counter;
+  const INIT_VALUE = 10;
+  beforeEach(
+    () => (counter = createCounter({ initValue: INIT_VALUE, min: INIT_VALUE }))
+  );
   it("dec() 함수를 호출해도 값이 감소하지 않는다.", () => {
-    expect(counter.val()).toEqual(initValue);
+    expect(counter.val()).toEqual(INIT_VALUE);
     counter.dec();
-    expect(counter.val()).toEqual(min);
-    counter.dec();
-    counter.dec();
+    expect(counter.val()).toEqual(INIT_VALUE);
     counter.dec();
     counter.dec();
-    expect(counter.val()).toEqual(min);
+    expect(counter.val()).toEqual(INIT_VALUE);
   });
 
   it("isMin() 호출 시 true를 반환한다.", () => {
@@ -60,19 +60,18 @@ describe("min 옵션 사용 시 현재값과 min 값이 동일하면", () => {
 });
 
 describe("max 옵션 사용 시 현재값과 max 값이 동일하면", () => {
-  const initValue = 9;
-  const max = 10;
-  const min = 0;
-  const counter = createCounter({ initValue, max, min });
+  let counter;
+  const INIT_VALUE = 10;
+  beforeEach(
+    () => (counter = createCounter({ initValue: INIT_VALUE, max: INIT_VALUE }))
+  );
   it("inc() 함수를 호출해도 값이 증가하지 않는다.", () => {
-    expect(counter.val()).toEqual(initValue);
+    expect(counter.val()).toEqual(INIT_VALUE);
     counter.inc();
-    expect(counter.val()).toEqual(max);
-    counter.inc();
-    counter.inc();
+    expect(counter.val()).toEqual(INIT_VALUE);
     counter.inc();
     counter.inc();
-    expect(counter.val()).toEqual(max);
+    expect(counter.val()).toEqual(INIT_VALUE);
   });
 
   it("isMax() 호출 시 true를 반환한다.", () => {
