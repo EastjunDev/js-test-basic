@@ -1,8 +1,8 @@
 export function createCounter(initObj = {}) {  
   const { initVal, initMin, initMax } = initObj;
-  let value = initVal || 0;
-  const min = typeof initMin === 'number' ? initMin : -Infinity;
-  const max = typeof initMax === 'number' ? initMax : Infinity;
+  let value = initVal || 0;  
+  const MIN = Number.isInteger(initMin) ? initMin : -Infinity;
+  const MAX = Number.isInteger(initMax) ? initMax : Infinity;
 
   return {
     val() {
@@ -19,13 +19,10 @@ export function createCounter(initObj = {}) {
       }      
     },
     isMax() {
-      return value === max;
+      return value === MAX;
     },
     isMin() {
-      return value === min;
-    },
-    min() {
-      return min;
+      return value === MIN;
     }
   };
 }
