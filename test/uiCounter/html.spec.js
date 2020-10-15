@@ -23,7 +23,7 @@ it('생성시 버튼과 초기값을 렌더링한다.', () => {
   expect(prettyHTML($container.html())).toBe(
     prettyHTML(`
     <button type="button" class="btn btn-secondary btn-dec">-</button>
-    <span class="value">10</span>
+    <span class="value" data-testid="value">10</span>
     <button type="button" class="btn btn-primary btn-inc">+</button>
   `)
   );
@@ -35,7 +35,7 @@ it('+ 버튼 클릭시 1 증가한다.', () => {
   expect(prettyHTML($container.html())).toBe(
     prettyHTML(`
     <button type="button" class="btn btn-secondary btn-dec">-</button>
-    <span class="value">11</span>
+    <span class="value" data-testid="value">11</span>
     <button type="button" class="btn btn-primary btn-inc">+</button>
   `)
   );
@@ -49,7 +49,7 @@ it('Max값인 경우 + 버튼이 disabled 상태가 되며 클릭해도 증가�
   expect(prettyHTML($container.html())).toBe(
     prettyHTML(`
     <button type="button" class="btn btn-secondary btn-dec">-</button>
-    <span class="value">12</span>
+    <span class="value" data-testid="value">12</span>
     <button type="button" disabled class="btn btn-primary btn-inc">+</button>
   `)
   );
@@ -61,7 +61,7 @@ it('- 버튼 클릭시 1 감소한다.', () => {
   expect(prettyHTML($container.html())).toBe(
     prettyHTML(`
     <button type="button" class="btn btn-secondary btn-dec">-</button>
-    <span class="value">9</span>
+    <span class="value" data-testid="value">9</span>
     <button type="button" class="btn btn-primary btn-inc">+</button>
   `)
   );
@@ -75,7 +75,7 @@ it('Min값인 경우 - 버튼이 disabled 상태가 되며, 클릭해도 감소�
   expect(prettyHTML($container.html())).toBe(
     prettyHTML(`
     <button type="button" disabled class="btn btn-secondary btn-dec">-</button>
-    <span class="value">8</span>
+    <span class="value" data-testid="value">8</span>
     <button type="button" class="btn btn-primary btn-inc">+</button>
   `)
   );
