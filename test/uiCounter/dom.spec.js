@@ -3,6 +3,11 @@ import { getByText, fireEvent } from '@testing-library/dom';
 import { createUICounter } from '../../src/uiCounter/counter';
 
 let container;
+const options = {
+  initVal: 10,
+  min: 8,
+  max: 12,
+};
 
 beforeEach(() => {
   container = document.createElement('div');
@@ -14,21 +19,51 @@ afterEach(() => {
 });
 
 it('생성시 버튼과 초기값을 렌더링한다.', () => {
+  createUICounter('div', options);
 
+  expect(getByText(container, '+')).toBeVisible();
+  expect(getByText(container, '10')).toBeVisible();
+  expect(getByText(container, '-')).toBeVisible();
 });
 
 it('+ 버튼 클릭시 1 증가한다.', () => {
+  createUICounter('div', options);
 
+  fireEvent.click(getByText(container, '+'));
+  expect(getByText(container, '11')).toBeVisible();
+  fireEvent.click(getByText(container, '+'));
+  expect(getByText(container, '12')).toBeVisible();
 });
 
 it('- 버튼 클릭시 1 감소한다.', () => {
+  createUICounter('div', options);
 
+  fireEvent.click(getByText(container, '-'));
+  expect(getByText(container, '9')).toBeVisible();
+  fireEvent.click(getByText(container, '-'));
+  expect(getByText(container, '8')).toBeVisible();
 });
 
 it('Max값인 경우 + 버튼이 disabled 상태가 되며 클릭해도 증가하지 않는다.', () => {
+  createUICounter('div', options);
 
+  fireEvent.click(getByText(container, '+'));
+  fireEvent.click(getByText(container, '+'));
+  fireEvent.click(getByText(container, '+'));
+  fireEvent.click(getByText(container, '+'));
+
+  expect(getByText(container, '12')).toBeVisible();
 });
 
 it('Min값인 경우 - 버튼이 disabled 상태가 되며, 클릭해도 감소하지 않는다.', () => {
+  createUICounter('div', options);
 
+  fireEvent.click(getByText(container, '-'));
+  fireEvent.click(getByText(container, '-'));
+  fireEvent.click(getByText(container, '-'));
+  fireEvent.click(getByText(container, '-'));
+  fireEvent.click(getByText(container, '-'));
+  fireEvent.click(getByText(container, '-'));
+
+  expect(getByText(container, '8')).toBeVisible();
 });
