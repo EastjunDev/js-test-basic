@@ -9,6 +9,8 @@
     "test:util": "jest test/util.spec.js --watch",
     "test:counter": "jest test/counter.spec.js --watch",
     "test:uiCounter": "jest test/uiCounter/dom.spec.js --watch",
+    "test:uiCounterHtml": "jest test/uiCounter/html.spec.js --watch",
+    "test:uiCounterSnapshot": "jest test/uiCounter/snapshot.spec.js --watch",
     "test:serverCounter": "jest test/serverCounter.spec.js --watch",
     "test:coverage": "jest --coverage",
     "app:uiCounter": "parcel uiCounter.html",

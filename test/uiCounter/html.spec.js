@@ -11,7 +11,7 @@ beforeEach(() => {
   createUICounter($container, {
     initVal: 10,
     min: 8,
-    max: 12
+    max: 12,
   });
 });
 
