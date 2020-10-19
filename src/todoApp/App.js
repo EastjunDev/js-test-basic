@@ -1,8 +1,11 @@
+import UserTitle from "./Components/UserTitle";
+
 export default class App {
   #$target;
   constructor($target) {
     this.#$target = $target;
     this.render();
+    this.initComponents();
   }
 
   render() {
@@ -21,7 +24,7 @@ export default class App {
   }
 
   initComponents() {
-    document.querySelector("#user-title");
+    new UserTitle(document.querySelector("#user-title"), this.store);
     document.querySelector("#user-list");
     document.querySelector("#todoapp");
   }

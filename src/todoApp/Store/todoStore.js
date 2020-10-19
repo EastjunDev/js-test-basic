@@ -1,7 +1,7 @@
 import { createStore, actionCreator } from "../utils/tiny-redux.js";
 
 const SET_USER_LIST = "setUserList";
-const SET_USER_ID = "setUserId";
+const SET_ACITVE_USER = "setAcitveUser";
 const ADD_USER = "addUser";
 const REMOVE_USER = "removeUser";
 
@@ -12,8 +12,17 @@ const SET_TODO_ITEM = "setTodoItem";
 const TOGGLE_TODO_ITEM = "toggleTodoItem";
 const SET_TODO_FILTER = "setTodoFilter";
 
-export const addTodoItem = ({ todoItem }) =>
+export const setAcitveUser = (activeUser) =>
+  actionCreator(SET_ACITVE_USER, { activeUser });
+
+export const addTodoItem = (todoItem) =>
   actionCreator(ADD_TODO_ITEM, { todoItem });
+
+const initState = {
+  activeUser: "null",
+  users: [],
+  todoList: [],
+};
 
 const reducer = (state = {}, { type, payload }) => {
   switch (type) {
@@ -22,6 +31,12 @@ const reducer = (state = {}, { type, payload }) => {
       return {
         ...state,
         todoList: [...state.todoList, todoItem],
+      };
+    case SET_ACITVE_USER:
+      const { activeUser } = payload;
+      return {
+        ...state,
+        activeUser,
       };
   }
 };
