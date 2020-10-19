@@ -1,9 +1,8 @@
-export default function UserList(props) {
-  const { users, activeUser } = props;
+export default function UserList({ users, activeUserId }) {
   return users
     .map(
-      ({ name }) => `
-    <button class="ripple ${activeUser === name ? "active" : ""}">
+      ({ name, _id }) => `
+    <button class="ripple ${_id === activeUserId ? "active" : ""}">
         ${name}
     </button>`
     )

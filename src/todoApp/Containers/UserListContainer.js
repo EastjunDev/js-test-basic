@@ -1,14 +1,17 @@
 import UserList from "../Components/UserList.js";
-import todoStroe from "../Store/todoStore.js";
+import todoStore from "../Store/todoStore.js";
 
-export default class UserListContianer {
-  constructor($target) {
-    this.$target = $target;
-    todoStroe.subscribe(this.render, this);
-  }
+export default function UserListContianer($target) {
+  let prevActiveUserId;
+  let prevUsers;
 
-  render() {
-    const { activeUser, users } = todoStroe.getState();
-    this.$target.innerHTML = UserList({ activeUser, users });
-  }
+  return () => {
+    const { users, activeUserId } = todoStore.getState();
+    if (activeUserId === prevActiveUserId && users === prevUsers) {
+      return;
+    }
+    prevActiveUserId = activeUserId;
+    prevUsers = users;
+    target.innerHTML = UserList({ activeUser, users });
+  };
 }

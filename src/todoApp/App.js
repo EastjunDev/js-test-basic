@@ -1,4 +1,6 @@
-import UserTitle from "./Components/UserTitle";
+import todoStore from "./Store/todoStore.js";
+import UserTitleContainer from "./Containers/UserTitleContainer.js";
+import UserListContainer from "./Containers/UserListContainer.js";
 
 export default class App {
   #$target;
@@ -24,8 +26,13 @@ export default class App {
   }
 
   initComponents() {
-    new UserTitle(document.querySelector("#user-title"), this.store);
-    document.querySelector("#user-list");
+    todoStore.subscribe(() =>
+      UserTitleContainer(document.querySelector("#user-title"))
+    );
+
+    todoStore.subscribe(() =>
+      UserListContainer(document.querySelector("#user-list"))
+    );
     document.querySelector("#todoapp");
   }
 }
