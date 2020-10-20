@@ -1,6 +1,7 @@
-import todoStore from "./Store/todoStore.js";
+import todoStore, { setUserList } from "./Store/todoStore.js";
 import UserTitleContainer from "./Containers/UserTitleContainer.js";
 import UserListContainer from "./Containers/UserListContainer.js";
+import { fetchTodoUsers } from "./api/todoAPI.js";
 
 export default class App {
   #$target;
@@ -26,13 +27,19 @@ export default class App {
   }
 
   initComponents() {
-    todoStore.subscribe(() =>
-      UserTitleContainer(document.querySelector("#user-title"))
-    );
+    const $userTitle = document.querySelector("#user-title");
+    const $userList = document.querySelector("#user-list");
+    const $todoApp = document.querySelector("#todoapp");
 
-    todoStore.subscribe(() =>
-      UserListContainer(document.querySelector("#user-list"))
-    );
-    document.querySelector("#todoapp");
+    todoStore.subscribe(UserTitleContainer($userTitle));
+    todoStore.subscribe(UserListContainer($userList));
+
+    (async function () {
+      const newUsers = await fetchTodoUsers();
+      console.log(newUsers);
+      const action = setUserList(newUsers);
+      console.log(action);
+      todoStore.dispath(setUserList(newUsers));
+    })();
   }
 }

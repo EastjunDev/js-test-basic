@@ -1,23 +1,18 @@
 import UserTitle from "../Components/UserTitle.js";
-import todoStore from "../Store/todoStore";
+import todoStore from "../Store/todoStore.js";
 
-function UserTitleContainer($target) {
-  let prevActiveUserId;
-  const onClickHandler = () => {};
-  const onDblClickHandler = () => {};
-
-  $target.addEventListener("click", onClickHandler);
-  $target.addEventListener("dblclick", onDblClickHandler);
+export default function UserTitleContainer($target) {
+  let prevActiveUserId = null;
 
   return () => {
-    const { activeUserId, userList } = todoStore.getState();
+    const { activeUserId, users } = todoStore.getState();
     if (prevActiveUserId === activeUserId) {
       return;
     }
     prevActiveUserId = activeUserId;
-    const activeUserIdx = userList.findIndex(({ _id }) => _id === activeUserId);
+    const activeUserIdx = users.findIndex(({ _id }) => _id === activeUserId);
     $target.innerHTML = UserTitle({
-      activeUser: userList[activeUserIdx]?.name,
+      activeUserName: users[activeUserIdx]?.name,
     });
   };
 }

@@ -1,9 +1,21 @@
 import UserList from "../Components/UserList.js";
-import todoStore from "../Store/todoStore.js";
+import todoStore, { setAcitveUserId } from "../Store/todoStore.js";
 
 export default function UserListContianer($target) {
-  let prevActiveUserId;
-  let prevUsers;
+  let prevActiveUserId = null;
+  let prevUsers = null;
+
+  const onClickHandler = (e) => {
+    const userId = e?.target?.dataset?.id;
+    if (!userId) {
+      return;
+    }
+    todoStore.dispath(setAcitveUserId(userId));
+  };
+  const onDblClickHandler = () => {};
+
+  $target.addEventListener("click", onClickHandler);
+  $target.addEventListener("dblclick", onDblClickHandler);
 
   return () => {
     const { users, activeUserId } = todoStore.getState();
@@ -12,6 +24,6 @@ export default function UserListContianer($target) {
     }
     prevActiveUserId = activeUserId;
     prevUsers = users;
-    target.innerHTML = UserList({ activeUser, users });
+    $target.innerHTML = UserList({ activeUserId, users });
   };
 }
