@@ -3,11 +3,9 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": false,
-        "targets": {
-          "chrome": "76"
-        }
+        "targets": { "browsers": ["last 2 versions"] }
       }
     ]
-  ]
+  ], 
+  "plugins": ["@babel/transform-runtime"]
 }
