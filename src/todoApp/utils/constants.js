@@ -5,7 +5,7 @@ export const FilterType = Object.freeze({
   PRIORITY: "priority",
 });
 
-export const BASE_URL = "https://blackcoffee-todolist.df.r.appspot.com/api/u";
+export const BASE_URL = "https://js-todo-list-9ca3a.df.r.appspot.com";
 export const METHOD = Object.freeze({
   GET: "GET",
   POST: "POST",

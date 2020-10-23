@@ -1,6 +1,8 @@
 export default function UserTitle({ activeUserName }) {
-  return `
+  return activeUserName
+    ? `
       <span>
         <strong>${activeUserName}</strong>'s Todo List
-      </span>`;
+      </span>`
+    : `<span>Todo List</span>`;
 }

@@ -3,10 +3,30 @@ import { BASE_URL, METHOD } from "../utils/constants.js";
 
 export const fetchTodoUsers = async () => {
   try {
-    return await request(BASE_URL);
+    const url = `${BASE_URL}/api/users`;
+    return await request(url);
   } catch (error) {
     console.log(error);
     return [];
+  }
+};
+
+export const addTodoUser = async (name) => {
+  try {
+    const url = `${BASE_URL}/api/users`;
+    const user = await request(url, options(METHOD.POST, { name }));
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeTodoUser = async (userId) => {
+  try {
+    const url = `${BASE_URL}/api/users/${userId}`;
+    return await request(url, options(METHOD.DELETE));
+  } catch (error) {
+    console.log(error);
   }
 };
 

@@ -1,5 +1,5 @@
 export default function UserList({ users, activeUserId }) {
-  return users
+  const usersHTML = users
     .map(
       ({ name, _id }) => `
     <button class="ripple ${_id === activeUserId ? "active" : ""}"
@@ -8,4 +8,10 @@ export default function UserList({ users, activeUserId }) {
     </button>`
     )
     .join(" ");
+  const userCreateBtnHTML = `
+    <button class="ripple user-create-button">
+      + 유저 생성
+    </button>
+  `;
+  return usersHTML + userCreateBtnHTML;
 }
