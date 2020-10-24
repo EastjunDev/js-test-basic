@@ -11,7 +11,7 @@
     "test:uiCounter": "jest test/uiCounter/dom.spec.js --watch",
     "test:serverCounter": "jest test/serverCounter.spec.js --watch",
     "test:coverage": "jest --coverage",
-    "test:todoApp": "jest test/todoApp.spec.js --watch",
+    "test:todoApp": "jest test/todoApp/todoApp.spec.js --watch",
     "app:uiCounter": "parcel uiCounter.html",
     "app:serverCounter": "node ./serverCounterBundle.js",
     "app:todoApp": "parcel todoApp.html --open",
@@ -27,6 +27,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.8.3",
     "@testing-library/cypress": "^4.2.0",

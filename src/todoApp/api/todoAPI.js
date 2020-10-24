@@ -1,4 +1,4 @@
-import { request, options } from "./request.js";
+import { request, createAxiosConfig } from "./request.js";
 import { BASE_URL, METHOD } from "../utils/constants.js";
 
 export const fetchTodoUsers = async () => {
@@ -11,88 +11,93 @@ export const fetchTodoUsers = async () => {
   }
 };
 
+export const fetchTodoUserById = async (userId) => {
+  try {
+    const url = `${BASE_URL}/api/users/${userId}`;
+    return await request(url, createAxiosConfig());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addTodoUser = async (name) => {
   try {
     const url = `${BASE_URL}/api/users`;
-    const user = await request(url, options(METHOD.POST, { name }));
+    const user = await request(url, createAxiosConfig(METHOD.POST, { name }));
     return user;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const removeTodoUser = async (userId) => {
+export const removeTodoUserById = async (userId) => {
   try {
     const url = `${BASE_URL}/api/users/${userId}`;
-    return await request(url, options(METHOD.DELETE));
+    return await request(url, createAxiosConfig(METHOD.DELETE));
   } catch (error) {
     console.log(error);
   }
 };
 
-export const fetchTodoItemsByUserName = async (userName) => {
+export const fetchTodoItemsById = async (userId) => {
   try {
-    const user = await request(`${BASE_URL}/${userName}/item`);
-    return user.todoList;
+    const url = `${BASE_URL}/api/users/${userId}/items`;
+    return await request(url);
   } catch (error) {
     console.log(error);
     return [];
   }
 };
 
-export const addTodoItem = async (userName, contents) => {
+export const addTodoItem = async (userId, contents) => {
   try {
-    const url = `${BASE_URL}/${userName}/item`;
-    return await request(url, options(METHOD.POST, { contents }));
+    const url = `${BASE_URL}/api/users/${userId}/items`;
+    return await request(url, createAxiosConfig(METHOD.POST, { contents }));
   } catch (error) {
     return { error: error.message };
   }
 };
 
-export const deleteTodoItemById = async (userName, todoId) => {
+export const deleteTodoItemById = async (userId, todoId) => {
   try {
-    const url = `${BASE_URL}/${userName}/item/${todoId}`;
-    return await request(url, options(METHOD.DELETE));
+    const url = `${BASE_URL}/api/users/${userId}/items/${todoId}`;
+    return await request(url, createAxiosConfig(METHOD.DELETE));
   } catch (error) {
     return { error: error.message };
   }
 };
 
-export const deleteAllTodoItems = async (userName) => {
+export const deleteAllTodoItems = async (userId) => {
   try {
-    const url = `${BASE_URL}/${userName}/items`;
-    return await request(url, options(METHOD.DELETE));
+    const url = `${BASE_URL}/api/users/${userId}/items`;
+    return await request(url, createAxiosConfig(METHOD.DELETE));
   } catch (error) {
     return { error: error.message };
   }
 };
 
-export const toggleTodoItemById = async (userName, todoId) => {
+export const toggleTodoItemById = async (userId, todoId) => {
   try {
-    const url = `${BASE_URL}/${userName}/item/${todoId}/toggle`;
-    return await request(url, options(METHOD.PUT));
+    const url = `${BASE_URL}/api/users/${userId}/items/${todoId}/toggle`;
+    return await request(url, createAxiosConfig(METHOD.PUT));
   } catch (error) {
     return { error: error.message };
   }
 };
 
-export const editTodoItemContentsById = async (userName, todoId, contents) => {
+export const setTodoItemContentsById = async (userId, todoId, contents) => {
   try {
-    const url = `${BASE_URL}/${userName}/item/${todoId}`;
-    return await request(url, options(METHOD.PUT, { contents }));
+    const url = `${BASE_URL}/api/users/${userId}/items/${todoId}`;
+    return await request(url, createAxiosConfig(METHOD.PUT, { contents }));
   } catch (error) {
     return { error: error.message };
   }
 };
 
-export const changeTodoItemPriorityById = async (
-  userName,
-  todoId,
-  priority
-) => {
+export const setTodoItemPriorityById = async (userId, todoId, priority) => {
   try {
-    const url = `${BASE_URL}/${userName}/item/${todoId}/priority`;
-    return await request(url, options(METHOD.PUT, { priority }));
+    const url = `${BASE_URL}/api/users/${userId}/items/${todoId}/priority`;
+    return await request(url, createAxiosConfig(METHOD.PUT, { priority }));
   } catch (error) {
     return { error: error.message };
   }

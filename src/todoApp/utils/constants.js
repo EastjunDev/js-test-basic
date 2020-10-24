@@ -7,10 +7,10 @@ export const FilterType = Object.freeze({
 
 export const BASE_URL = "https://js-todo-list-9ca3a.df.r.appspot.com";
 export const METHOD = Object.freeze({
-  GET: "GET",
-  POST: "POST",
-  PUT: "PUT",
-  DELETE: "DELETE",
+  GET: "get",
+  POST: "post",
+  PUT: "put",
+  DELETE: "delete",
 });
 
 export const ESC_KEY = "Escape";

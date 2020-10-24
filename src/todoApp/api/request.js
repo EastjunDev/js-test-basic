@@ -1,24 +1,22 @@
 import { METHOD } from "../utils/constants.js";
+import axios from "axios";
 
-export const request = async (url, option) => {
+export const request = async (url, config = createAxiosConfig()) => {
   try {
-    const res = await fetch(url, option);
+    const res = await axios({ ...config, url });
     if (res.status !== 200) {
       throw new Error(`Error status code : ${res.status}`);
     }
-    return await res.json();
+    return res.data;
   } catch (error) {
     throw Error(error.message);
   }
 };
 
-export const options = (method = METHOD.GET, body) => {
-  if (body) {
-    body = JSON.stringify(body);
-  }
+export function createAxiosConfig(method = METHOD.GET, data) {
   return {
-    method,
     headers: { "Content-Type": "application/json" },
-    body,
+    method,
+    data,
   };
-};
+}
