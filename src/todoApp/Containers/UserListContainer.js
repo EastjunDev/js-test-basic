@@ -1,15 +1,12 @@
-import { addTodoUser, removeTodoUser } from "../api/todoAPI.js";
+import { addTodoUser, removeTodoUserById } from "../api/todoAPI.js";
 import UserList from "../Components/UserList.js";
 import todoStore, {
   addUser,
   removeUser,
-  setAcitveUserId,
+  setAcitveUser,
 } from "../Store/todoStore.js";
 
 export default function UserListContianer($target) {
-  let prevActiveUserId = null;
-  let prevUsers = null;
-
   const onClickHandler = async (e) => {
     if (e?.target?.classList.contains("user-create-button")) {
       const name = prompt("추가하고 싶은 이름을 입력해주세요.");
@@ -19,7 +16,7 @@ export default function UserListContianer($target) {
     }
     const userId = e?.target?.dataset?.id;
     if (userId) {
-      todoStore.dispath(setAcitveUserId(userId));
+      todoStore.dispath(setAcitveUser(userId));
     }
   };
   const onDblClickHandler = async (e) => {
@@ -27,20 +24,23 @@ export default function UserListContianer($target) {
     if (!userId) {
       return;
     }
-    await removeTodoUser(userId);
+    await removeTodoUserById(userId);
     todoStore.dispath(removeUser(userId));
   };
 
   $target.addEventListener("click", onClickHandler);
   $target.addEventListener("dblclick", onDblClickHandler);
 
+  let prevActiveUserId = null;
+  let prevUsers = null;
+
   return () => {
-    const { users, activeUserId } = todoStore.getState();
-    if (activeUserId === prevActiveUserId && users === prevUsers) {
+    const { users, activeUser } = todoStore.getState();
+    if (activeUser?._id === prevActiveUserId && users === prevUsers) {
       return;
     }
-    prevActiveUserId = activeUserId;
+    prevActiveUserId = activeUser?._id;
     prevUsers = users;
-    $target.innerHTML = UserList({ activeUserId, users });
+    $target.innerHTML = UserList({ activeUserId: activeUser?._id, users });
   };
 }

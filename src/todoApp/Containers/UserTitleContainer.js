@@ -5,14 +5,11 @@ export default function UserTitleContainer($target) {
   let prevActiveUserId = null;
 
   return () => {
-    const { activeUserId, users } = todoStore.getState();
-    if (prevActiveUserId === activeUserId) {
+    const { activeUser } = todoStore.getState();
+    if (prevActiveUserId === activeUser?._id) {
       return;
     }
-    prevActiveUserId = activeUserId;
-    const activeUserIdx = users.findIndex(({ _id }) => _id === activeUserId);
-    $target.innerHTML = UserTitle({
-      activeUserName: users[activeUserIdx]?.name,
-    });
+    prevActiveUserId = activeUser?._id;
+    $target.innerHTML = UserTitle({ activeUserName: activeUser?.name });
   };
 }

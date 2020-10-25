@@ -6,12 +6,14 @@ export default function TodoListContainer($target) {
   let prevTodoList = null;
 
   return () => {
-    const { activeUserId, todoList } = todoStore.getState();
+    const { activeUser } = todoStore.getState();
+    const activeUserId = activeUser?._id;
+    const todoList = activeUser?.todoList;
     if (prevActiveUserId === activeUserId && prevTodoList === todoList) {
       return;
     }
     prevActiveUserId = activeUserId;
     prevTodoList = todoList;
-    $target.innerHTML = TodoList();
+    $target.innerHTML = TodoList({ todoList });
   };
 }
