@@ -8,6 +8,11 @@ describe('옵션이 지정되지 않은 경우', () => {
   });
 
   it('inc() 함수는 값을 1증가시킨다.', () => {
+    beforeEach(() => {
+      console.log('inc 호출전');
+      expect(counter.val()).toEqual(0);  
+    });
+    
     expect(counter.inc()).toEqual(1);
     expect(counter.inc()).toEqual(2);
   });
