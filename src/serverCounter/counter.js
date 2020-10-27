@@ -11,9 +11,9 @@ export function createServerCounter(el, options) {
     const incDisabled = isMax ? 'disabled' : '';
 
     $el.html(`
-      <button type="button" ${decDisabled} class="btn btn-secondary btn-dec">-</button>
+      <button type="button" ${decDisabled} class="btn btn-secondary btn-dec" data-cy="decrease">-</button>
       <span class="value">${value}</span>
-      <button type="button" ${incDisabled} class="btn btn-primary btn-inc">+</button>
+      <button type="button" ${incDisabled} class="btn btn-primary btn-inc" data-cy="increase">+</button>
     `);
   }
 
