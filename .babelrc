@@ -3,11 +3,13 @@
     [
       "@babel/preset-env",
       {
-        "useBuiltIns": false,
-        "targets": {
-          "chrome": "76"
-        }
+        "targets": { "browsers": ["last 2 versions"] }
       }
     ]
+  ], 
+  "plugins": [
+    ["@babel/plugin-proposal-class-properties", {}, "unique-name"],
+    ["@babel/transform-runtime"]
   ]
 }
+

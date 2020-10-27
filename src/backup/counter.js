@@ -1,7 +1,11 @@
 module.exports.createCounter = function createCounter(options = {}) {
   let value = options.initVal || 0;
-  const min = options.min || Number.NEGATIVE_INFINITY;
-  const max = options.max || Number.POSITIVE_INFINITY;
+  const min = Number.isInteger(options.min)
+    ? options.min
+    : Number.NEGATIVE_INFINITY;
+  const max = Number.isInteger(options.max)
+    ? options.max
+    : Number.POSITIVE_INFINITY;
 
   return {
     val() {
@@ -22,6 +26,6 @@ module.exports.createCounter = function createCounter(options = {}) {
     },
     isMin() {
       return min === value;
-    }
+    },
   };
 };
