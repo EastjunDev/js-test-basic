@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { getByText, fireEvent, getByTestId, waitFor, findByTestId } from '@testing-library/dom';
+import { getByText, fireEvent, getByTestId, waitFor } from '@testing-library/dom';
 import { createServerCounter } from '../src/serverCounter/counter';
 import { createCounter } from "../src/backup/counter";
 

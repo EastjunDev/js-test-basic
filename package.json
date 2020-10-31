@@ -10,6 +10,7 @@
     "test:counter": "jest test/counter.spec.js --watch",
     "test:uiCounter": "jest test/uiCounter/dom.spec.js --watch",
     "test:serverCounter": "jest test/serverCounter.spec.js --watch",
+    "test:todo": "jest test/todo.spec.js --watch",
     "test:coverage": "jest --coverage",
     "app:uiCounter": "parcel uiCounter.html",
     "app:serverCounter": "node ./serverCounterBundle.js",
