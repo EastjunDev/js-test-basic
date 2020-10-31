@@ -12,7 +12,7 @@ export function createServerCounter(el, options) {
 
     $el.html(`
       <button type="button" ${decDisabled} class="btn btn-secondary btn-dec">-</button>
-      <span class="value">${value}</span>
+      <span class="value" data-testid="value">${value}</span>
       <button type="button" ${incDisabled} class="btn btn-primary btn-inc">+</button>
     `);
   }
